@@ -33,5 +33,6 @@ variable "servers" {
   type        = map(object({}))
   default = {
     "iis-test-01" = {}
+    "iis-test-02" = {}
   }
 }
