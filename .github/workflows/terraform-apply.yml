@@ -55,8 +55,8 @@ jobs:
       - name: Terraform plan
         run: terraform plan -no-color
 
-      - name: Terraform apply
-        run: terraform apply -auto-approve
+      - name: Terraform destroy
+        run: terraform destroy -auto-approve
 
       - name: Show outputs
         run: terraform output -json
