@@ -14,6 +14,16 @@ permissions:
 jobs:
   apply:
     runs-on: ubuntu-latest
+
+    # ===========================================================
+    # THE DEPLOY GATE.
+    # Binding this job to the `production` environment makes the
+    # whole job PAUSE before any step runs, until a required
+    # reviewer on that environment approves it in the UI.
+    # Configure reviewers in: Settings > Environments > production.
+    # ===========================================================
+    environment: production
+
     defaults:
       run:
         working-directory: terraform
@@ -39,6 +49,11 @@ jobs:
             -backend-config="bucket=${{ secrets.TF_STATE_BUCKET }}" \
             -backend-config="key=iis-test/terraform.tfstate" \
             -backend-config="dynamodb_table=terraform-locks"
+
+      # A plan is printed here too, so the approver can eyeball exactly
+      # what is about to change in the run logs before the apply step.
+      - name: Terraform plan
+        run: terraform plan -no-color
 
       - name: Terraform apply
         run: terraform apply -auto-approve

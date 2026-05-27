@@ -1,0 +1,16 @@
+# CODEOWNERS — defines who must review changes to specific paths.
+# When the ruleset on `main` has "Require review from Code Owners" enabled,
+# a PR that touches any path below cannot merge until an owner here approves.
+#
+# Syntax: <path pattern>   <owner(s)>
+# Owners can be @users or @org/teams. In a real org you'd point infra at a
+# TEAM (e.g. @your-org/platform-team) so any platform engineer can approve,
+# not a single person who becomes a bottleneck.
+
+# All infrastructure code — the platform lead owns this.
+/terraform/                 @npraveen436-wq
+
+# The CI/CD definitions themselves are sensitive — guard them too,
+# so nobody can quietly weaken the gates by editing the workflows.
+/.github/workflows/         @npraveen436-wq
+/.github/CODEOWNERS         @npraveen436-wq
