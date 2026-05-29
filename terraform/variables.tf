@@ -32,5 +32,6 @@ variable "servers" {
   description = "Map of server name -> config"
   type        = map(object({}))
   default = {
+"iis-testapp-01" = {}
   }
 }
